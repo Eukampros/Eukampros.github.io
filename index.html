@@ -45,6 +45,10 @@
   .team-name{font-size:18px;font-weight:bold;color:var(--acc);letter-spacing:1px}
   .del{background:transparent;border:1px solid var(--danger);color:var(--danger);padding:6px 12px;font-size:12px}
   .del:hover{background:var(--danger);color:#fff}
+  .header-match-clock{display:flex;align-items:center;gap:6px;padding:4px 12px;
+    background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:6px}
+  .header-clock-label{font-size:12px;color:var(--mut)}
+  .header-clock-val{font-size:20px;font-weight:bold;letter-spacing:2px;font-family:'Courier New',monospace;min-width:90px;transition:color .3s}
   .team-chevron{font-size:12px;color:var(--mut);margin-left:4px}
   .finish-btn{background:var(--acc);color:#06251e;border:none;padding:6px 14px;font-size:12px;font-weight:bold;letter-spacing:1px;border-radius:6px;cursor:pointer;margin-left:auto}
   .finish-btn:hover{filter:brightness(1.15)}
@@ -169,6 +173,13 @@
   .pick-arrow{font-size:18px;color:var(--line);margin:0 6px;padding-bottom:18px}
   .pick-empty{color:var(--mut);font-size:12px;font-style:italic}
 
+  /* match clock */
+  .match-clock-wrap{display:flex;align-items:center;gap:16px;padding:12px 16px;
+    background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:8px;margin-bottom:14px}
+  .match-clock-label{font-size:10px;color:var(--mut);letter-spacing:2px;text-transform:uppercase}
+  .match-clock-display{font-size:40px;font-weight:bold;letter-spacing:3px;font-family:'Courier New',monospace;
+    transition:color .3s;margin-left:auto}
+
   /* pending timer */
   .pending-wrap{display:flex;align-items:center;gap:12px;padding:12px 14px;
     border-radius:8px;border:2px solid var(--acc);background:rgba(88,225,196,.08);flex-wrap:wrap}
@@ -234,6 +245,23 @@
   .path-arrow{font-size:20px;color:var(--acc);padding-bottom:20px;font-weight:bold}
 
   /* forest & place phase */
+  /* phase containers */
+  .phase-container{border-radius:10px;padding:14px;margin-bottom:14px;border:2px solid}
+  .spear-container{background:rgba(240,136,62,.12);border-color:rgba(240,136,62,.5)}
+  .forest-container{background:rgba(63,185,80,.12);border-color:rgba(63,185,80,.5)}
+  .place-container{background:rgba(88,225,196,.12);border-color:rgba(88,225,196,.5)}
+  .phase-container .phase-divider{margin-top:0}
+
+  /* phase dividers */
+  .phase-divider{font-size:14px;font-weight:bold;letter-spacing:3px;text-transform:uppercase;
+    padding:12px 18px;border-radius:8px;margin:16px 0 14px;display:flex;align-items:center;gap:10px}
+  .spear-divider{color:#fff;background:rgba(240,136,62,.35);
+    border-left:6px solid var(--acc2);border-top:1px solid rgba(240,136,62,.5);border-bottom:1px solid rgba(240,136,62,.5);text-shadow:0 1px 3px rgba(0,0,0,.4)}
+  .forest-divider{color:#fff;background:rgba(63,185,80,.35);
+    border-left:6px solid var(--green);border-top:1px solid rgba(63,185,80,.5);border-bottom:1px solid rgba(63,185,80,.5);text-shadow:0 1px 3px rgba(0,0,0,.4)}
+  .place-divider{color:#fff;background:rgba(88,225,196,.35);
+    border-left:6px solid var(--acc);border-top:1px solid rgba(88,225,196,.5);border-bottom:1px solid rgba(88,225,196,.5);text-shadow:0 1px 3px rgba(0,0,0,.4)}
+
   .fp-section-label{font-size:11px;font-weight:bold;letter-spacing:2px;color:var(--mut);
     text-transform:uppercase;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
   .forest-card{background:var(--panel2);border:1px solid var(--line);border-radius:8px;overflow:hidden}
@@ -242,6 +270,12 @@
   .forest-card-body{padding:16px;display:flex;flex-direction:column;gap:14px}
   .fc-timer-label{font-size:11px;color:var(--mut);letter-spacing:1px;text-transform:uppercase}
   .fc-timer-row{display:flex;align-items:center;gap:10px}
+  .forest-movlog{border-top:1px solid var(--line);padding-top:10px;margin-top:8px;display:flex;flex-direction:column;gap:4px}
+  .movlog-row{display:flex;align-items:center;gap:8px;padding:5px 10px;border-radius:6px;background:rgba(255,255,255,.03);border:1px solid var(--line)}
+  .movlog-icon{font-size:12px;font-weight:bold;min-width:64px}
+  .movlog-detail{font-size:11px;color:var(--mut);flex:1;letter-spacing:1px}
+  .movlog-num{font-size:10px;color:var(--line);font-weight:bold}
+  .fc-laps{border-top:1px solid var(--line);padding-top:10px;display:flex;flex-direction:column;gap:4px}
   .fc-blocks-section{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:6px;padding:12px}
   .fc-blocks-row{display:flex;align-items:center;gap:10px;margin-top:4px}
   .fc-live-score{font-size:14px;color:var(--mut);margin-left:8px}
@@ -391,6 +425,50 @@
   .conclude-lap-num{font-size:11px;color:var(--mut);letter-spacing:1px;min-width:32px}
   .conclude-lap-time{font-size:14px;font-weight:bold;color:var(--txt);letter-spacing:1px}
 
+  /* ── forest card redesign ───────────────────────────────────────────────── */
+  .fr-card{background:var(--panel2);border:1px solid var(--line);border-radius:10px;overflow:hidden;height:100%}
+  .fr-header{display:flex;align-items:center;gap:10px;padding:12px 16px}
+  .fr-title{font-size:13px;font-weight:bold;letter-spacing:1px;flex:1}
+  .fr-badge{font-size:10px;font-weight:bold;padding:3px 10px;border-radius:12px;letter-spacing:1px;white-space:nowrap}
+  .fr-badge.up{background:rgba(63,185,80,.2);color:var(--green);border:1px solid var(--green)}
+  .fr-badge.down{background:rgba(88,225,196,.1);color:var(--mut);border:1px solid var(--line)}
+  .fr-reset{background:transparent;border:1px solid var(--line);color:var(--mut);padding:4px 10px;border-radius:5px;cursor:pointer;font-size:12px}
+  .fr-reset:hover{border-color:var(--txt);color:var(--txt)}
+  .fr-body{padding:14px;display:flex;flex-direction:column;gap:12px}
+  .fr-timer-section{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:8px;padding:12px;display:flex;flex-direction:column;gap:10px}
+  .fr-timer-row{display:flex;align-items:center;gap:10px}
+  .fr-time{font-size:28px;font-weight:bold;letter-spacing:2px;color:var(--txt);flex:1}
+  .fr-time.running{color:var(--green);animation:blink 1s step-start infinite}
+  .fr-start-stop{padding:12px 20px;border-radius:8px;border:none;font-size:13px;font-weight:bold;letter-spacing:1px;cursor:pointer;font-family:inherit;white-space:nowrap}
+  .fr-start-stop.start{background:var(--green);color:#061a0a}
+  .fr-start-stop.stop{background:var(--danger);color:#fff}
+  .fr-start-stop:hover{filter:brightness(1.1)}
+  .fr-box-counter{display:flex;align-items:center;gap:12px;padding:10px 12px;background:rgba(63,185,80,.07);border:1px solid rgba(63,185,80,.25);border-radius:6px}
+  .fr-box-label{font-size:11px;color:var(--green);font-weight:bold;letter-spacing:1px;flex:1}
+  .fr-box-ctrl{display:flex;align-items:center;gap:8px}
+  .fr-box-btn{width:36px;height:36px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--txt);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .fr-box-btn:hover{border-color:var(--green);color:var(--green)}
+  .fr-box-num{font-size:26px;font-weight:bold;min-width:40px;text-align:center}
+  .fr-log{background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  .fr-log-header{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border-bottom:1px solid var(--line)}
+  .fr-log-title{font-size:10px;font-weight:bold;color:var(--mut);letter-spacing:2px;text-transform:uppercase}
+  .fr-log-total{font-size:11px;font-weight:bold;letter-spacing:1px}
+  .fr-run-list{display:flex;flex-direction:column}
+  .fr-run-row{display:flex;align-items:center;gap:8px;padding:8px 12px;border-bottom:1px solid rgba(255,255,255,.04)}
+  .fr-run-row:last-child{border-bottom:none}
+  .fr-run-num{font-size:10px;color:var(--mut);min-width:24px;font-weight:bold}
+  .fr-run-time{font-size:14px;font-weight:bold;color:var(--txt);letter-spacing:1px;flex:1}
+  .fr-run-blocks{font-size:12px;color:var(--acc);display:flex;align-items:center;gap:4px;min-width:48px}
+  .fr-run-box-icon{font-size:12px}
+  .fr-run-pts{font-size:12px;color:var(--yellow);font-weight:bold;min-width:52px;text-align:right}
+  .fr-run-del{background:transparent;border:1px solid var(--line);color:var(--mut);padding:3px 8px;border-radius:4px;cursor:pointer;font-size:11px}
+  .fr-run-del:hover{border-color:var(--danger);color:var(--danger)}
+  .fr-empty{padding:12px;font-size:11px;color:var(--mut);font-style:italic;text-align:center}
+  .fr-floor-btn{width:100%;padding:12px;border-radius:8px;font-size:13px;font-weight:bold;letter-spacing:1px;cursor:pointer;font-family:inherit;border:none}
+  .fr-floor-btn.up{background:linear-gradient(135deg,var(--green),var(--acc));color:#06251e}
+  .fr-floor-btn.down{background:rgba(240,136,62,.15);color:var(--acc2);border:2px solid var(--acc2) !important;border:none}
+  .fr-floor-btn:hover{filter:brightness(1.1)}
+
   /* forest conclude */
   .conclude-forest-row{background:rgba(255,255,255,.03);border:1px solid var(--line);
     border-radius:8px;padding:14px;margin-bottom:10px}
@@ -496,14 +574,14 @@ function makeTeam(name){
     activeTab: 'game',
     expanded: true,
     spear:{
-      assemble:{ ms:0, running:false, display:'00.000', count:0, laps:[] },
+      assemble:{ ms:0, running:false, display:'00.000', count:0, laps:[], matchMs:0, matchRunning:false, matchDisplay:'3:00.000' },
       circles: Array.from({length:6}, ()=>({ ms:0, running:false, display:'00.000', pickOrder:0, fieldPos:0 })),
       pickSeq: 0,
       pending:{ ms:0, running:false, display:'00.000' }
     },
     forest:{
-      R1:{ ms:0, running:false, display:'00.000', blocks:0, confirmed:false, score:0 },
-      R2:{ ms:0, running:false, display:'00.000', blocks:0, confirmed:false, score:0 }
+      R1:{ ms:0, running:false, display:'00.000', blocks:0, confirmed:false, score:0, laps:[], movementLog:[], currentBlocks:0 },
+      R2:{ ms:0, running:false, display:'00.000', blocks:0, confirmed:false, score:0, laps:[], movementLog:[], currentBlocks:0 }
     },
     place:{
       grid: Array(9).fill(null),
@@ -511,7 +589,9 @@ function makeTeam(name){
       rowThreat: [false, false, false],
       repicks: 0,
       repickMode: false,
-      pending:{ ms:0, running:false, display:'00.000' }
+      pending:{ ms:0, running:false, display:'00.000' },
+      pendingR1:{ ms:0, running:false, display:'00.000' },
+      pendingR2:{ ms:0, running:false, display:'00.000' }
     }
   };
 }
@@ -565,6 +645,7 @@ function toggleTimer(idx, round, taskKey){
   if(!round && taskKey === 'assemble'){
     const asm = teams[idx].spear.assemble;
     const key = `ti-${idx}-assemble`;
+    const matchKey = `ti-${idx}-match`;
     if(asm.running){
       clearInterval(intervals[key]);
       delete intervals[key];
@@ -576,6 +657,7 @@ function toggleTimer(idx, round, taskKey){
       }
       asm.ms = 0; asm.display = '00.000';
     } else {
+      // start assemble lap timer
       const startWall = Date.now();
       intervals[key] = setInterval(()=>{
         asm.ms = Date.now() - startWall;
@@ -583,6 +665,33 @@ function toggleTimer(idx, round, taskKey){
         updateTimerDisplay(idx, null, 'assemble');
       }, 50);
       asm.running = true;
+      // start match clock if not already running
+      if(!asm.matchRunning){
+        const MATCH_MS = 3 * 60 * 1000;
+        const matchStart = Date.now() - asm.matchMs;
+        asm.matchRunning = true;
+        intervals[matchKey] = setInterval(()=>{
+          asm.matchMs = Date.now() - matchStart;
+          const elapsed = asm.matchMs;
+          const remaining = Math.max(0, MATCH_MS - elapsed);
+          const m = Math.floor(remaining / 60000);
+          const s = Math.floor((remaining % 60000) / 1000);
+          const ms3 = Math.floor((remaining % 1000) / 10);
+          asm.matchDisplay = `${m}:${String(s).padStart(2,'0')}.${String(ms3).padStart(2,'0')}`;
+          const el = document.getElementById(`match-clock-${idx}`);
+          if(el){
+            el.textContent = asm.matchDisplay;
+            el.style.color = remaining < 30000 ? 'var(--danger)' : remaining < 60000 ? 'var(--yellow)' : 'var(--green)';
+          }
+          if(remaining <= 0){
+            clearInterval(intervals[matchKey]);
+            delete intervals[matchKey];
+            asm.matchRunning = false;
+            asm.matchDisplay = '0:00.00';
+            render();
+          }
+        }, 50);
+      }
     }
     render();
     return;
@@ -614,9 +723,13 @@ function deleteLap(idx, li){
 
 function resetAssemble(idx){
   const key = `ti-${idx}-assemble`;
+  const matchKey = `ti-${idx}-match`;
   if(intervals[key]){ clearInterval(intervals[key]); delete intervals[key]; }
+  if(intervals[matchKey]){ clearInterval(intervals[matchKey]); delete intervals[matchKey]; }
   const asm = teams[idx].spear.assemble;
-  asm.ms = 0; asm.running = false; asm.display = '00.000'; asm.laps = []; asm.count = 0;
+  asm.ms = 0; asm.running = false; asm.display = '00.000';
+  asm.laps = []; asm.count = 0;
+  asm.matchMs = 0; asm.matchRunning = false; asm.matchDisplay = '3:00.000';
   render();
 }
 
@@ -750,13 +863,20 @@ function updFieldPos(idx, ci, val){
 // ── forest & place logic ──────────────────────────────────────────────────────
 function toggleForestTimer(idx, robot){
   const f = teams[idx].forest[robot];
-  if(f.confirmed) return; // locked after confirm
   const key = `ti-${idx}-forest-${robot}`;
   if(f.running){
     clearInterval(intervals[key]); delete intervals[key];
     f.running = false;
+    if(f.ms > 0){
+      if(!f.laps) f.laps = [];
+      f.laps.push({ ms: f.ms, display: msToDisplay(f.ms), blocks: f.currentBlocks || 0 });
+      // accumulate total blocks
+      f.blocks = f.laps.reduce((s,l) => s + (l.blocks||0), 0);
+      f.score = f.blocks * 10;
+    }
+    f.ms = 0; f.display = '00.000'; f.currentBlocks = 0;
   } else {
-    const startWall = Date.now() - f.ms;
+    const startWall = Date.now();
     intervals[key] = setInterval(()=>{
       f.ms = Date.now() - startWall;
       f.display = msToDisplay(f.ms);
@@ -774,7 +894,7 @@ function resetForestTimer(idx, robot){
   if(teams[idx].forest[robot].confirmed) return;
   const key = `ti-${idx}-forest-${robot}`;
   if(intervals[key]){ clearInterval(intervals[key]); delete intervals[key]; }
-  teams[idx].forest[robot] = { ms:0, running:false, display:'00.000', blocks:0, confirmed:false, score:0 };
+  teams[idx].forest[robot] = { ms:0, running:false, display:'00.000', blocks:0, confirmed:false, score:0, laps:[], movementLog:[], currentBlocks:0 };
   render();
 }
 
@@ -790,15 +910,21 @@ function confirmForest(idx, robot){
     const key = `ti-${idx}-forest-${robot}`;
     clearInterval(intervals[key]); delete intervals[key];
     f.running = false;
+    if(f.ms > 0){ if(!f.laps) f.laps=[]; f.laps.push(f.ms); }
+    f.ms = 0; f.display = '00.000';
   }
   f.confirmed = true;
   f.score = f.blocks * 10;
+  if(!f.movementLog) f.movementLog = [];
+  f.movementLog.push({ action:'UP', lapCount: f.laps.length, blocks: f.blocks, score: f.score, time: Date.now() });
   render();
 }
 
 function unconfirmForest(idx, robot){
-  teams[idx].forest[robot].confirmed = false;
-  teams[idx].forest[robot].score = 0;
+  const f = teams[idx].forest[robot];
+  f.confirmed = false;
+  if(!f.movementLog) f.movementLog = [];
+  f.movementLog.push({ action:'DOWN', lapCount: f.laps.length, blocks: f.blocks, score: f.score, time: Date.now() });
   render();
 }
 
@@ -807,50 +933,58 @@ function toggleRepickMode(idx){
   render();
 }
 
-function startTTCPending(idx){
+function startTTCPending(idx){ // legacy - keep for compatibility
+  startTTCPendingFor(idx, 'pendingR1');
+  startTTCPendingFor(idx, 'pendingR2');
+}
+
+function startTTCPendingFor(idx, which){
   const pl = teams[idx].place;
-  if(pl.pending.running) return;
-  const key = `ti-${idx}-ttc-pending`;
-  pl.pending.ms = 0;
+  if(pl[which].running) return;
+  const key = `ti-${idx}-ttc-${which}`;
+  pl[which].ms = 0;
   const startWall = Date.now();
   intervals[key] = setInterval(()=>{
-    pl.pending.ms = Date.now() - startWall;
-    pl.pending.display = msToDisplay(pl.pending.ms);
-    const el = document.getElementById(`ttc-pending-time-${idx}`);
-    if(el) el.textContent = pl.pending.display;
+    pl[which].ms = Date.now() - startWall;
+    pl[which].display = msToDisplay(pl[which].ms);
+    const el = document.getElementById(`ttc-${which}-time-${idx}`);
+    if(el) el.textContent = pl[which].display;
   }, 50);
-  pl.pending.running = true;
+  pl[which].running = true;
   render();
 }
 
-function cancelTTCPending(idx){
-  const key = `ti-${idx}-ttc-pending`;
+function cancelTTCPendingFor(idx, which){
+  const key = `ti-${idx}-ttc-${which}`;
   if(intervals[key]){ clearInterval(intervals[key]); delete intervals[key]; }
-  teams[idx].place.pending = { ms:0, running:false, display:'00.000' };
+  teams[idx].place[which] = { ms:0, running:false, display:'00.000' };
   render();
 }
 
 function placeKFS(idx, cell){
   const pl = teams[idx].place;
   if(pl.grid[cell]) return;
-  if(!pl.pending.running && !pl.pending.ms) return; // must start timer first
   const row = Math.floor(cell / 3);
+  // row 0=top(R2), row 1=middle(R2), row 2=bottom(R1)
+  const isR1row = row === 2;
+  const which = isR1row ? 'pendingR1' : 'pendingR2';
+  const pend = pl[which];
+  if(!pend.running && !pend.ms) return; // must start timer first
   const rowInfo = [
-    { label:'TOP',    pts:80, robot:'R2 AUTO', color:'var(--green)' },
-    { label:'MIDDLE', pts:40, robot:'R2 AUTO', color:'var(--acc)'   },
-    { label:'BOTTOM', pts:30, robot:'R1 MANUAL',   color:'var(--acc2)'  }
+    { label:'TOP',    pts:80, robot:'R2 AUTO',   color:'var(--green)' },
+    { label:'MIDDLE', pts:40, robot:'R2 AUTO',   color:'var(--acc)'   },
+    { label:'BOTTOM', pts:30, robot:'R1 MANUAL', color:'var(--acc2)'  }
   ][row];
-  // stop pending timer
-  const key = `ti-${idx}-ttc-pending`;
+  const key = `ti-${idx}-ttc-${which}`;
   if(intervals[key]){ clearInterval(intervals[key]); delete intervals[key]; }
   pl.seq++;
   pl.grid[cell] = {
     order: pl.seq, ...rowInfo,
     threatened: pl.rowThreat[row] || false,
-    ms: pl.pending.ms,
-    display: pl.pending.display
+    ms: pend.ms,
+    display: pend.display
   };
-  pl.pending = { ms:0, running:false, display:'00.000' };
+  pl[which] = { ms:0, running:false, display:'00.000' };
   render();
 }
 
@@ -866,9 +1000,11 @@ function removeKFS(idx, cell){
 }
 
 function resetPlaceGrid(idx){
-  const key = `ti-${idx}-ttc-pending`;
-  if(intervals[key]){ clearInterval(intervals[key]); delete intervals[key]; }
-  teams[idx].place = { grid: Array(9).fill(null), seq: 0, rowThreat: [false, false, false], repicks: 0, repickMode: false, pending:{ ms:0, running:false, display:'00.000' } };
+  ['ttc-pendingR1','ttc-pendingR2','ttc-pending'].forEach(k=>{
+    const key = `ti-${idx}-${k}`;
+    if(intervals[key]){ clearInterval(intervals[key]); delete intervals[key]; }
+  });
+  teams[idx].place = { grid: Array(9).fill(null), seq: 0, rowThreat: [false, false, false], repicks: 0, repickMode: false, pending:{ ms:0, running:false, display:'00.000' }, pendingR1:{ ms:0, running:false, display:'00.000' }, pendingR2:{ ms:0, running:false, display:'00.000' } };
   render();
 }
 
@@ -892,6 +1028,19 @@ function toggleRowThreat(idx, row){
 }
 
 // ── render forest & place ─────────────────────────────────────────────────────
+function updCurrentBlocks(idx, robot, val){
+  teams[idx].forest[robot].currentBlocks = Math.max(0, Math.min(12, parseInt(val)||0));
+  render();
+}
+
+function deleteForestLap(idx, robot, li){
+  const f = teams[idx].forest[robot];
+  f.laps.splice(li, 1);
+  f.blocks = f.laps.reduce((s,l) => s + (l.blocks||0), 0);
+  f.score = f.blocks * 10;
+  render();
+}
+
 function renderForestRobot(idx, robot){
   const f = teams[idx].forest[robot];
   const isR1 = robot === 'R1';
@@ -899,62 +1048,98 @@ function renderForestRobot(idx, robot){
   const bg    = isR1 ? 'rgba(240,136,62,.10)' : 'rgba(63,185,80,.10)';
   const icon  = isR1 ? '🤖' : '🟠';
   const label = isR1 ? 'R1 — AUTO' : 'R2 — MANUAL';
+  const laps  = f.laps || [];
+  const movLog = f.movementLog || [];
 
-  if(f.confirmed){
+  // run log rows
+  const runRows = laps.length ? laps.map((lap,li) => {
+    const lapDisp   = typeof lap==='object' ? lap.display : msToDisplay(lap.ms||lap);
+    const lapBlocks = typeof lap==='object' ? (lap.blocks||0) : 0;
     return `
-    <div class="forest-card confirmed">
-      <div class="forest-card-head" style="background:${bg};color:${color}">${icon} ${label} — FOREST <span style="margin-left:8px;font-size:10px;background:${color};color:#0d1117;padding:2px 8px;border-radius:4px">✓ CONFIRMED</span></div>
-      <div class="forest-card-body">
-        <div class="forest-confirmed-row">
-          <div class="fc-stat"><div class="fc-stat-label">TIME</div><div class="fc-stat-val" style="color:${color}">${f.display}</div></div>
-          <div class="fc-stat"><div class="fc-stat-label">BLOCKS</div><div class="fc-stat-val" style="color:${color}">${f.blocks}</div></div>
-          <div class="fc-stat"><div class="fc-stat-label">KFS SCORE</div><div class="fc-stat-val" style="color:var(--yellow)">${f.score}</div><div class="fc-stat-sub">× 10 pts</div></div>
-        </div>
-        <button class="btn-unconfirm" onclick="unconfirmForest(${idx},'${robot}')">✎ EDIT</button>
+    <div class="fr-run-row">
+      <div class="fr-run-num">#${li+1}</div>
+      <div class="fr-run-time">${lapDisp}</div>
+      <div class="fr-run-blocks">
+        <span class="fr-run-box-icon">📦</span>${lapBlocks}
       </div>
+      <div class="fr-run-pts">+${lapBlocks*10} pts</div>
+      <button class="fr-run-del" onclick="deleteForestLap(${idx},'${robot}',${li})">✕</button>
     </div>`;
-  }
+  }).join('') : `<div class="fr-empty">No runs yet — press START to begin</div>`;
+
+  // totals
+  const totalBlocks = laps.reduce((s,l)=>s+(typeof l==='object'?(l.blocks||0):0),0);
+  const totalScore  = totalBlocks * 10;
+
+  // movement log
+  const movRows = movLog.length ? movLog.map((e,i)=>`
+    <div class="movlog-row">
+      <span class="movlog-icon">${e.action==='UP'?'🏃 UP':'⬇ DOWN'}</span>
+      <span class="movlog-detail">${e.lapCount} runs · ${e.blocks} blocks · ${e.score}pts</span>
+      <span class="movlog-num">#${i+1}</span>
+    </div>`).join('') : '';
+
+  const floorBadge = f.confirmed
+    ? `<span class="fr-badge up">🏃 ON UPPER FLOOR</span>`
+    : `<span class="fr-badge down">🌲 IN FOREST</span>`;
+
+  const actionBtn = f.confirmed
+    ? (robot==='R2' ? `<button class="fr-floor-btn down" onclick="unconfirmForest(${idx},'${robot}')">⬇ MOVE BACK DOWN</button>` : '')
+    : `<button class="fr-floor-btn up" onclick="confirmForest(${idx},'${robot}')">🏃 MOVE TO UPPER FLOOR</button>`;
 
   return `
-  <div class="forest-card">
-    <div class="forest-card-head" style="background:${bg};color:${color}">${icon} ${label} — FOREST</div>
-    <div class="forest-card-body">
-      <div class="fc-timer-label">FOREST TIME</div>
-      <div class="fc-timer-row">
-        <span id="fdisp-${idx}-${robot}" class="timer-display${f.running?' running':''}">${f.display}</span>
-        <button id="fbtn-${idx}-${robot}" class="btn-timer ${f.running?'btn-stop':'btn-start'}"
-          onclick="toggleForestTimer(${idx},'${robot}')">
-          ${f.running?'⏹ STOP':'▶ START'}
-        </button>
-        <button class="btn-reset" onclick="resetForestTimer(${idx},'${robot}')">↺</button>
-      </div>
+  <div class="fr-card">
+    <!-- HEADER -->
+    <div class="fr-header" style="background:${bg};border-bottom:2px solid ${color}20">
+      <span class="fr-title" style="color:${color}">${icon} ${label}</span>
+      ${floorBadge}
+      <button class="fr-reset" onclick="resetForestTimer(${idx},'${robot}')">↺</button>
+    </div>
 
-      <div class="fc-blocks-section">
-        <div class="fc-timer-label" style="margin-bottom:8px">KFS BLOCKS COLLECTED</div>
-        <div class="fc-blocks-row">
-          <button class="cnt-btn" onclick="updForestBlocks(${idx},'${robot}',${f.blocks}-1)">−</button>
-          <input type="number" min="0" max="12" value="${f.blocks}" class="count-input"
-            oninput="updForestBlocks(${idx},'${robot}',this.value)">
-          <button class="cnt-btn" onclick="updForestBlocks(${idx},'${robot}',${f.blocks}+1)">+</button>
-          <div class="fc-live-score">= <span style="color:var(--yellow);font-weight:bold;font-size:20px">${f.blocks*10}</span> pts</div>
+    <!-- TIMER + BOX COUNTER -->
+    <div class="fr-body">
+      <div class="fr-timer-section">
+        <div class="fr-timer-row">
+          <span id="fdisp-${idx}-${robot}" class="fr-time${f.running?' running':''}">${f.display}</span>
+          <button id="fbtn-${idx}-${robot}" class="fr-start-stop ${f.running?'stop':'start'}"
+            onclick="toggleForestTimer(${idx},'${robot}')">
+            ${f.running ? '⏹ STOP & LOG' : '▶ START'}
+          </button>
         </div>
-        <div style="font-size:10px;color:var(--mut);margin-top:4px">Max 12 blocks · 10 pts each</div>
+        ${f.running ? `
+        <div class="fr-box-counter">
+          <span class="fr-box-label">📦 BOXES THIS RUN</span>
+          <div class="fr-box-ctrl">
+            <button class="fr-box-btn" onclick="updCurrentBlocks(${idx},'${robot}',${f.currentBlocks||0}-1)">−</button>
+            <span class="fr-box-num" style="color:${color}">${f.currentBlocks||0}</span>
+            <button class="fr-box-btn" onclick="updCurrentBlocks(${idx},'${robot}',${f.currentBlocks||0}+1)">+</button>
+          </div>
+        </div>` : ''}
       </div>
 
-      <button class="btn-confirm-forest" onclick="confirmForest(${idx},'${robot}')">
-        🏃 MOVE TO UPPER FLOOR — CONFIRM SCORE
-      </button>
+      <!-- RUN LOG -->
+      <div class="fr-log">
+        <div class="fr-log-header">
+          <span class="fr-log-title">📋 RUN LOG</span>
+          ${laps.length ? `<span class="fr-log-total" style="color:var(--yellow)">${totalBlocks} blocks · ${totalScore} pts</span>` : ''}
+        </div>
+        <div class="fr-run-list">${runRows}</div>
+      </div>
+
+      ${movRows ? `<div class="forest-movlog">${movRows}</div>` : ''}
     </div>
   </div>`;
 }
 
 function renderPlacePhase(idx){
   const pl = teams[idx].place;
-  const pend = pl.pending;
+  const pend = pl.pending; // legacy
+  const pendR1 = pl.pendingR1 || { ms:0, running:false, display:'00.000' };
+  const pendR2 = pl.pendingR2 || { ms:0, running:false, display:'00.000' };
   const rowDefs = [
-    { label:'TOP ROW',    pts:80, robot:'R2 AUTO', color:'var(--green)',  bg:'rgba(63,185,80,.12)'  },
-    { label:'MIDDLE ROW', pts:40, robot:'R2 AUTO', color:'var(--acc)',    bg:'rgba(88,225,196,.10)' },
-    { label:'BOTTOM ROW', pts:30, robot:'R1 MANUAL',   color:'var(--acc2)',   bg:'rgba(240,136,62,.12)' }
+    { label:'TOP ROW',    pts:80, robot:'R2 AUTO',   color:'var(--green)',  bg:'rgba(63,185,80,.12)'  },
+    { label:'MIDDLE ROW', pts:40, robot:'R2 AUTO',   color:'var(--acc)',    bg:'rgba(88,225,196,.10)' },
+    { label:'BOTTOM ROW', pts:30, robot:'R1 MANUAL', color:'var(--acc2)',   bg:'rgba(240,136,62,.12)' }
   ];
 
   // check win (3 in col or diagonal — all same team not relevant here, just 3 filled)
@@ -969,7 +1154,7 @@ function renderPlacePhase(idx){
     const isWin = winLine && winLine.includes(cell);
     const rowThreatened = pl.rowThreat && pl.rowThreat[row];
     const isThreat = (c && c.threatened) || rowThreatened;
-    const canPlace = !c && pend.running;
+    const canPlace = !c && (row === 2 ? pendR1.running : pendR2.running);
     return `
     <div class="ttc-cell ${c?'ttc-filled':''} ${isWin?'ttc-win':''} ${isThreat?'ttc-threat':''} ${canPlace?'ttc-assignable':''}"
       style="${isThreat ? '' : (c ? `border-color:${rd.color};background:${rd.bg}` : '')}"
@@ -1045,20 +1230,34 @@ function renderPlacePhase(idx){
     ⚔ SPEAR THREAT — ${rowThreatCount > 0 ? rowThreatCount+' ROW(S) MARKED' : ''} ${threatCount > 0 ? '· '+threatCount+' KFS CAN BE PUSHED OUT' : ''} · TAP ⚔ TO TOGGLE
   </div>` : '';
 
-  const ttcPendingUI = pend.running ? `
-  <div class="pending-wrap" style="margin-bottom:10px">
-    <div class="pending-label">⏱ TIMER RUNNING — TAP A CELL TO PLACE KFS</div>
-    <div id="ttc-pending-time-${idx}" class="pending-time">${pend.display}</div>
-    <button class="pending-cancel" onclick="cancelTTCPending(${idx})">✕ CANCEL</button>
+  const r1PendingUI = pendR1.running ? `
+  <div class="pending-wrap" style="border-color:var(--acc2)">
+    <div class="pending-label" style="color:var(--acc2)">🟠 R1 MANUAL — BOTTOM ROW TIMER RUNNING</div>
+    <div id="ttc-pendingR1-time-${idx}" class="pending-time" style="color:var(--acc2)">${pendR1.display}</div>
+    <button class="pending-cancel" onclick="cancelTTCPendingFor(${idx},'pendingR1')">✕</button>
   </div>` : `
-  <div class="pending-wrap idle" style="margin-bottom:10px">
-    <button class="pending-start-btn" onclick="startTTCPending(${idx})">▶ START TIMER</button>
-    <div class="pending-hint">Press first, then tap a grid cell to place & record time</div>
+  <div class="pending-wrap idle">
+    <button class="pending-start-btn" style="background:var(--acc2);color:#2b1402" onclick="startTTCPendingFor(${idx},'pendingR1')">▶ R1 MANUAL START</button>
+    <div class="pending-hint">Bottom row — R1 MANUAL places here</div>
+  </div>`;
+
+  const r2PendingUI = pendR2.running ? `
+  <div class="pending-wrap" style="border-color:var(--acc)">
+    <div class="pending-label" style="color:var(--acc)">🤖 R2 AUTO — MIDDLE/TOP ROW TIMER RUNNING</div>
+    <div id="ttc-pendingR2-time-${idx}" class="pending-time" style="color:var(--acc)">${pendR2.display}</div>
+    <button class="pending-cancel" onclick="cancelTTCPendingFor(${idx},'pendingR2')">✕</button>
+  </div>` : `
+  <div class="pending-wrap idle">
+    <button class="pending-start-btn" style="background:var(--acc);color:#06251e" onclick="startTTCPendingFor(${idx},'pendingR2')">▶ R2 AUTO START</button>
+    <div class="pending-hint">Middle & Top rows — R2 AUTO places here</div>
   </div>`;
 
   return `
   ${threatBanner}
-  ${ttcPendingUI}
+  <div class="spear-grid" style="margin-bottom:10px">
+    ${r1PendingUI}
+    ${r2PendingUI}
+  </div>
   ${repickBtn}
   <div class="ttc-wrap">
     <div class="ttc-left">
@@ -1086,13 +1285,17 @@ function renderPlacePhase(idx){
 
 function renderForestPlace(idx){
   return `
-  <div class="fp-section-label" style="margin-top:20px;color:var(--green);border-bottom-color:rgba(63,185,80,.4);background:rgba(63,185,80,.06);padding:10px 14px;border-radius:6px;border-left:4px solid var(--green)">🌲 FOREST PHASE — KFS COLLECTION</div>
-  <div class="spear-grid" style="margin-bottom:20px">
-    ${renderForestRobot(idx,'R1')}
-    ${renderForestRobot(idx,'R2')}
+  <div class="phase-container forest-container">
+    <div class="phase-divider forest-divider">🌲 FOREST PHASE — KFS COLLECTION</div>
+    <div class="spear-grid" style="margin-bottom:0">
+      ${renderForestRobot(idx,'R1')}
+      ${renderForestRobot(idx,'R2')}
+    </div>
   </div>
-  <div class="fp-section-label" style="color:var(--acc);border-bottom-color:rgba(88,225,196,.4);background:rgba(88,225,196,.06);padding:10px 14px;border-radius:6px;border-left:4px solid var(--acc)">🏟️ PLACE PHASE — TIC-TAC-TOE</div>
-  ${renderPlacePhase(idx)}`;
+  <div class="phase-container place-container">
+    <div class="phase-divider place-divider">🏟️ PLACE PHASE — TIC-TAC-TOE</div>
+    ${renderPlacePhase(idx)}
+  </div>`;
 }
 
 // ── conclude ──────────────────────────────────────────────────────────────────
@@ -1329,6 +1532,19 @@ function renderSpear(idx){
   </div>`;
 
   return `
+  <div class="assemble-shared">
+    <div class="assemble-shared-label">⚙ ASSEMBLE — SHARED TIMER (R1 MANUAL + R2 AUTO)</div>
+    <div class="task-row">
+      <span id="disp-${idx}-assemble" class="timer-display${runAsm?' running':''}">${asm.display}</span>
+      <button id="btn-${idx}-assemble" class="btn-timer btn-assemble ${runAsm?'btn-stop':'btn-start'}"
+        onclick="${runAsm ? `toggleTimer(${idx},null,'assemble')` : `toggleTimer(${idx},null,'assemble');startPending(${idx})`}">
+        ${runAsm?'⏹ STOP':'▶ START'}
+      </button>
+      <button class="btn-reset" onclick="resetAssemble(${idx})">↺ RESET ALL</button>
+    </div>
+    <div class="lap-list">${lapsHTML}</div>
+    ${conclusionHTML}
+  </div>
   <div class="spear-circles-wrap">
     <div class="spear-circles-label">⚔ SPEARHEAD SLOTS</div>
     ${pendingUI}
@@ -1340,19 +1556,6 @@ function renderSpear(idx){
     <div class="rack-slots-row">${rackslotsHTML}</div>
     <div class="pick-timeline-label" style="margin-top:14px">📍 PATH: SLOT ORDER PICKED</div>
     ${pathHTML}
-  </div>
-  <div class="assemble-shared">
-    <div class="assemble-shared-label">⚙ ASSEMBLE — SHARED TIMER (R1 AUTO + R2 MANUAL)</div>
-    <div class="task-row">
-      <span id="disp-${idx}-assemble" class="timer-display${runAsm?' running':''}">${asm.display}</span>
-      <button id="btn-${idx}-assemble" class="btn-timer btn-assemble ${runAsm?'btn-stop':'btn-start'}"
-        onclick="${runAsm ? `toggleTimer(${idx},null,'assemble')` : `toggleTimer(${idx},null,'assemble');startPending(${idx})`}">
-        ${runAsm?'⏹ STOP':'▶ START'}
-      </button>
-      <button class="btn-reset" onclick="resetAssemble(${idx})">↺ RESET ALL</button>
-    </div>
-    <div class="lap-list">${lapsHTML}</div>
-    ${conclusionHTML}
   </div>`;
 }
 
@@ -1409,6 +1612,10 @@ function render(){
       <div class="team-head" onclick="toggleExpand(${idx})" style="cursor:pointer">
         <span class="team-name">▣ ${esc(t.name)}</span>
         <span class="team-chevron">${t.expanded ? '▲' : '▼'}</span>
+        <div class="header-match-clock" onclick="event.stopPropagation()">
+          <span class="header-clock-label">⏱</span>
+          <span id="match-clock-${idx}" class="header-clock-val" style="color:${t.spear.assemble.matchRunning || t.spear.assemble.matchMs > 0 ? (Math.max(0,180000-t.spear.assemble.matchMs)<30000?'var(--danger)':Math.max(0,180000-t.spear.assemble.matchMs)<60000?'var(--yellow)':'var(--green)') : 'var(--mut)'}">${t.spear.assemble.matchDisplay||'3:00.00'}</span>
+        </div>
         <button class="finish-btn" onclick="event.stopPropagation();showFinish(${idx})">🏁 FINISH</button>
         ${t.expanded ? `<button class="reset-team" onclick="event.stopPropagation();resetTeam(${idx})">↺ RESET</button>` : ''}
         <button class="del" onclick="event.stopPropagation();delTeam(${idx})">DELETE</button>
@@ -1419,8 +1626,10 @@ function render(){
         <button class="tab${t.activeTab==='conclude'?' active':''}" onclick="setTab(${idx},'conclude')" style="${t.activeTab==='conclude'?'color:var(--yellow);border-bottom-color:var(--yellow)':''}">📊 CONCLUDE</button>
       </div>
       <div class="tab-content${t.activeTab==='game'?' active':''}">
-        <div class="fp-section-label" style="margin-bottom:14px;color:var(--acc2);border-bottom-color:rgba(240,136,62,.4);background:rgba(240,136,62,.06);padding:10px 14px;border-radius:6px;border-left:4px solid var(--acc2)">⚔ SPEAR PHASE</div>
-        ${renderSpear(idx)}
+        <div class="phase-container spear-container">
+          <div class="phase-divider spear-divider">⚔ SPEAR PHASE</div>
+          ${renderSpear(idx)}
+        </div>
         ${renderForestPlace(idx)}
       </div>
       <div class="tab-content${t.activeTab==='conclude'?' active':''}">
