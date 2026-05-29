@@ -118,7 +118,7 @@
   .spear-circles-label{font-size:11px;font-weight:bold;letter-spacing:2px;color:var(--acc2);text-transform:uppercase;margin-bottom:14px}
   .spear-circles-row{display:flex;gap:12px;align-items:flex-start;flex-wrap:wrap}
   .spear-circle-slot{display:flex;flex-direction:column;align-items:center;gap:8px}
-  .spear-circle{width:90px;height:90px;overflow:hidden;border-radius:50%;border:3px solid var(--line);background:var(--bg);
+  .spear-circle{width:64px;height:64px;overflow:hidden;border-radius:50%;border:3px solid var(--line);background:var(--bg);
     cursor:pointer;display:flex;align-items:center;justify-content:center;
     font-size:11px;font-weight:bold;letter-spacing:1px;color:var(--mut);
     transition:border-color .15s, background .15s, box-shadow .15s;position:relative;user-select:none}
@@ -455,6 +455,58 @@
     box-shadow:0 0 12px rgba(88,225,196,.4)}
   .repick-count{font-size:11px;color:var(--mut);letter-spacing:1px}
 
+  /* save modal */
+  .save-modal-box{background:var(--panel);border:2px solid var(--green);border-radius:14px;
+    padding:24px;min-width:320px;max-width:480px;width:90%;display:flex;flex-direction:column;gap:16px}
+  .save-modal-title{font-size:16px;font-weight:bold;letter-spacing:2px;color:var(--green)}
+  .save-modal-sub{font-size:11px;color:var(--mut);letter-spacing:1px}
+  .save-team-list{display:flex;flex-direction:column;gap:8px;max-height:300px;overflow-y:auto}
+  .save-team-row{display:flex;align-items:center;gap:12px;padding:10px 14px;
+    background:var(--panel2);border:1px solid var(--line);border-radius:8px;cursor:pointer;transition:.15s}
+  .save-team-row:hover{border-color:var(--green)}
+  .save-team-row input[type=checkbox]{width:18px;height:18px;accent-color:var(--green);cursor:pointer;flex-shrink:0}
+  .save-team-name{font-size:14px;font-weight:bold;color:var(--txt);flex:1}
+  .save-team-hint{font-size:10px;color:var(--mut);letter-spacing:1px}
+  .save-modal-actions{display:flex;gap:10px;justify-content:flex-end}
+  .save-modal-cancel{background:transparent;border:1px solid var(--line);color:var(--mut);padding:10px 18px;font-size:13px}
+  .save-modal-cancel:hover{border-color:var(--danger);color:var(--danger)}
+  .save-modal-btn{background:var(--green);color:#061a0a;border:none;padding:10px 20px;font-size:13px;font-weight:bold;letter-spacing:1px;border-radius:6px}
+  .save-modal-btn:hover{filter:brightness(1.1)}
+
+  /* compare mode */
+  .btn-compare{background:transparent;border:2px solid var(--yellow);color:var(--yellow);padding:10px 16px;font-size:13px;font-weight:bold;letter-spacing:1px}
+  .btn-compare:hover{background:rgba(210,153,34,.15)}
+  .btn-compare.active{background:rgba(210,153,34,.2);box-shadow:0 0 10px rgba(210,153,34,.3)}
+  .cmp-wrap{background:var(--panel);border:2px solid var(--yellow);border-radius:12px;padding:20px;margin-bottom:20px}
+  .cmp-header{font-size:14px;font-weight:bold;letter-spacing:2px;color:var(--yellow);margin-bottom:16px;text-transform:uppercase}
+  .cmp-pickers{display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+  .cmp-picker{flex:1;min-width:200px;background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:12px}
+  .cmp-picker-label{font-size:10px;color:var(--mut);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;font-weight:bold}
+  .cmp-picker-btns{display:flex;flex-wrap:wrap;gap:6px}
+  .cmp-team-btn{background:transparent;border:1px solid var(--line);color:var(--mut);padding:6px 12px;border-radius:6px;font-size:12px;cursor:pointer;font-family:inherit;transition:.15s}
+  .cmp-team-btn:hover{border-color:var(--acc);color:var(--acc)}
+  .cmp-team-btn.active{background:rgba(88,225,196,.15);border-color:var(--acc);color:var(--acc);font-weight:bold}
+  .cmp-section-label{font-size:10px;font-weight:bold;letter-spacing:2px;color:var(--mut);
+    text-transform:uppercase;padding:8px 0 6px;border-bottom:1px solid var(--line);margin-bottom:8px;margin-top:16px}
+  .cmp-table{width:100%;border-collapse:collapse;margin-bottom:8px}
+  .cmp-th{padding:6px 10px;font-size:11px;letter-spacing:1px;text-transform:uppercase;font-weight:bold}
+  .cmp-th-left{text-align:right}
+  .cmp-th-right{text-align:left}
+  .cmp-tr{border-bottom:1px solid rgba(255,255,255,.04)}
+  .cmp-td{padding:8px 10px;vertical-align:middle}
+  .cmp-label{text-align:center;font-size:11px;color:var(--mut);letter-spacing:1px;text-transform:uppercase;white-space:nowrap}
+  .cmp-val-left{text-align:right;font-size:15px;font-weight:bold;font-family:monospace;letter-spacing:1px}
+  .cmp-val-right{text-align:left;font-size:15px;font-weight:bold;font-family:monospace;letter-spacing:1px}
+  .cmp-win{color:var(--green)}
+  .cmp-lose{color:var(--danger);opacity:.7}
+  .cmp-total-row .cmp-td{border-top:2px solid var(--line);padding-top:12px}
+  .cmp-columns{display:flex;gap:0;align-items:flex-start}
+  .cmp-col{flex:1;min-width:0;padding:0 12px}
+  .cmp-col-header{font-size:14px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;
+    text-align:center;padding:10px;background:rgba(255,255,255,.04);border-radius:8px;
+    margin-bottom:14px;border:2px solid currentColor;opacity:.9}
+  .cmp-divider{width:2px;background:var(--line);align-self:stretch;flex-shrink:0;margin:0 4px}
+
   /* conclude table */
   .con-table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:4px}
   .con-th{padding:6px 10px;text-align:left;font-size:9px;letter-spacing:2px;color:var(--mut);
@@ -546,7 +598,7 @@
   .fr-timer-row{display:flex;align-items:center;gap:10px}
   .fr-time{font-size:28px;font-weight:bold;letter-spacing:2px;color:var(--txt);flex:1}
   .fr-time.running{color:var(--green);animation:blink 1s step-start infinite}
-  .fr-start-stop{padding:12px 20px;border-radius:8px;border:none;font-size:13px;font-weight:bold;letter-spacing:1px;cursor:pointer;font-family:inherit;white-space:nowrap}
+  .fr-start-stop{padding:8px 10px;border-radius:8px;border:none;font-size:11px;font-weight:bold;letter-spacing:1px;cursor:pointer;font-family:inherit;white-space:nowrap}
   .fr-start-stop.start{background:var(--green);color:#061a0a}
   .fr-start-stop.stop{background:var(--danger);color:#fff}
   .fr-start-stop:hover{filter:brightness(1.1)}
@@ -560,8 +612,8 @@
   .fr-log-header{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border-bottom:1px solid var(--line)}
   .fr-log-title{font-size:10px;font-weight:bold;color:var(--mut);letter-spacing:2px;text-transform:uppercase}
   .fr-log-total{font-size:11px;font-weight:bold;letter-spacing:1px}
-  .fr-cancel-btn{padding:12px 16px;border-radius:8px;border:2px solid var(--danger);background:transparent;
-    color:var(--danger);font-size:13px;font-weight:bold;letter-spacing:1px;cursor:pointer;font-family:inherit}
+  .fr-cancel-btn{padding:8px 10px;border-radius:8px;border:2px solid var(--danger);background:transparent;
+    color:var(--danger);font-size:11px;font-weight:bold;letter-spacing:1px;cursor:pointer;font-family:inherit}
   .fr-cancel-btn:hover{background:var(--danger);color:#fff}
   .fr-run-list{display:flex;flex-direction:column}
   .fr-run-row{display:flex;align-items:center;gap:8px;padding:8px 12px;border-bottom:1px solid rgba(255,255,255,.04)}
@@ -665,8 +717,10 @@
       📂 LOAD SESSION
       <input type="file" accept=".json" style="display:none" onchange="importJSON(event)">
     </label>
+    <button id="btn-compare" class="btn-compare" onclick="toggleCompare()" style="display:none">⚖ COMPARE</button>
   </div>
 
+  <div id="compare-panel" style="display:none"></div>
   <div id="teams"></div>
 
 <script>
@@ -1023,7 +1077,7 @@ function toggleForestTimer(idx, robot){
       const el = document.getElementById(`fdisp-${idx}-${robot}`);
       const btn = document.getElementById(`fbtn-${idx}-${robot}`);
       if(el) el.textContent = f.display;
-      if(btn){ btn.textContent='⏹ STOP & LOG'; btn.className='fr-start-stop stop'; }
+      if(btn){ btn.textContent='⏹ STOP'; btn.className='fr-start-stop stop'; }
     }, 50);
     f.running = true;
 
@@ -1039,7 +1093,7 @@ function toggleForestTimer(idx, robot){
           const el = document.getElementById(`fdisp-${idx}-R2`);
           const btn = document.getElementById(`fbtn-${idx}-R2`);
           if(el) el.textContent = other.display;
-          if(btn){ btn.textContent='⏹ STOP & LOG'; btn.className='fr-start-stop stop'; }
+          if(btn){ btn.textContent='⏹ STOP'; btn.className='fr-start-stop stop'; }
         }, 50);
         other.running = true;
       }
@@ -1300,8 +1354,8 @@ function renderForestRobot(idx, robot){
           <span id="fdisp-${idx}-${robot}" class="fr-time${f.running?' running':''}">${f.display}</span>
           ${f.running ? `
           <button id="fbtn-${idx}-${robot}" class="fr-start-stop stop"
-            onclick="toggleForestTimer(${idx},'${robot}')">⏹ STOP & LOG</button>
-          <button class="fr-cancel-btn" onclick="cancelForestTimer(${idx},'${robot}')">✕ CANCEL</button>
+            onclick="toggleForestTimer(${idx},'${robot}')">⏹ STOP</button>
+          <button class="fr-cancel-btn" onclick="cancelForestTimer(${idx},'${robot}')">✕</button>
           ` : `
           <button id="fbtn-${idx}-${robot}" class="fr-start-stop start"
             onclick="toggleForestTimer(${idx},'${robot}')">▶ START</button>
@@ -1809,7 +1863,7 @@ function renderSpear(idx){
       <div id="circle-time-${idx}-${ci}" class="spear-circle-time ${state}">${c.display}</div>
       <div class="spear-circle-btns">
         ${c.ms > 0 && !c.running ? `<button class="spear-circle-reset" onclick="resetCircle(${idx},${ci})">↺ RESET</button>` : ''}
-        ${c.running ? `<button class="spear-circle-cancel" onclick="cancelCircle(${idx},${ci})">✕ CANCEL</button>` : ''}
+        ${c.running ? `<button class="spear-circle-cancel" onclick="cancelCircle(${idx},${ci})">✕</button>` : ''}
       </div>
     </div>`;
   }).join('');
@@ -1890,7 +1944,7 @@ function renderSpear(idx){
   <div class="pending-wrap">
     <div class="pending-label">⏱ TIMER RUNNING — TAP A CIRCLE TO ASSIGN</div>
     <div id="pending-time-${idx}" class="pending-time">${pend.display}</div>
-    <button class="pending-cancel" onclick="cancelPending(${idx})">✕ CANCEL</button>
+    <button class="pending-cancel" onclick="cancelPending(${idx})">✕</button>
   </div>` : `
   <div class="pending-wrap idle">
     <div class="pending-hint" style="font-size:12px">👇 Press <b style="color:var(--green)">▶ START</b> on the ASSEMBLE timer below to begin tracking</div>
@@ -2039,12 +2093,79 @@ function scalePhases(idx, delta){
   if(lbl) lbl.textContent = phaseScales[idx] + '%';
 }
 
+let compareMode = false;
+let compareSelected = [null, null]; // [leftIdx, rightIdx]
+
+function toggleCompare(){
+  compareMode = !compareMode;
+  const btn = document.getElementById('btn-compare');
+  if(btn) btn.classList.toggle('active', compareMode);
+  render();
+}
+
+function selectCompareTeam(slot, idx){
+  compareSelected[slot] = idx;
+  render();
+}
+
+function renderCompare(){
+  const [li, ri] = compareSelected;
+
+  const teamPicker = (slot, current) => `
+  <div class="cmp-picker">
+    <div class="cmp-picker-label">${slot===0?'◀ LEFT':'RIGHT ▶'}</div>
+    <div class="cmp-picker-btns">
+      ${teams.map((t,i)=>`
+        <button class="cmp-team-btn ${current===i?'active':''}" onclick="selectCompareTeam(${slot},${i})">
+          ${t.name}
+        </button>`).join('')}
+    </div>
+  </div>`;
+
+  return `
+  <div class="cmp-wrap">
+    <div class="cmp-header">⚖ COMPARE MODE</div>
+    <div class="cmp-pickers">
+      ${teamPicker(0,li)}
+      ${teamPicker(1,ri)}
+    </div>
+    ${(li!==null && ri!==null) ? `
+    <div class="cmp-columns">
+      <div class="cmp-col">
+        <div class="cmp-col-header" style="color:var(--acc2)">◀ ${teams[li].name}</div>
+        ${renderConclude(li)}
+      </div>
+      <div class="cmp-divider"></div>
+      <div class="cmp-col">
+        <div class="cmp-col-header" style="color:var(--green)">${teams[ri].name} ▶</div>
+        ${renderConclude(ri)}
+      </div>
+    </div>` : `<div style="color:var(--mut);text-align:center;padding:20px;font-style:italic">Select a team for each side above</div>`}
+  </div>`;
+}
+
 function toggleExpand(idx){
   teams[idx].expanded = !teams[idx].expanded;
   render();
 }
 
 function render(){
+  // show/hide compare button
+  const compareBtn = document.getElementById('btn-compare');
+  if(compareBtn) compareBtn.style.display = teams.length >= 2 ? '' : 'none';
+  if(compareBtn) compareBtn.classList.toggle('active', compareMode);
+
+  // render compare panel
+  const cp = document.getElementById('compare-panel');
+  if(cp){
+    if(compareMode && teams.length >= 2){
+      cp.style.display = '';
+      cp.innerHTML = renderCompare();
+    } else {
+      cp.style.display = 'none';
+    }
+  }
+
   const c = document.getElementById('teams');
   if(!teams.length){ c.innerHTML='<div style="color:var(--mut);text-align:center;padding:40px;font-style:italic">No teams yet — add one above.</div>'; return; }
   c.innerHTML = teams.map((t,idx)=>`
@@ -2120,29 +2241,58 @@ function csvCell(s){ s=String(s); return /[",\n]/.test(s)?'"'+s.replace(/"/g,'""
 function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
 function exportJSON(){
-  // Strip running intervals state before saving (they can't be serialized)
-  const snapshot = teams.map(t => {
-    const s = JSON.parse(JSON.stringify(t));
-    // Mark any running timers as stopped
+  // Show save modal
+  const modal = document.getElementById('save-modal');
+  if(!modal) return;
+  // Pre-select all teams (newest = last added = checked by default)
+  const checkboxes = modal.querySelectorAll('.save-team-cb');
+  checkboxes.forEach(cb => { cb.checked = true; });
+  // Rebuild team list
+  const list = modal.querySelector('.save-team-list');
+  if(list){
+    list.innerHTML = teams.map((t,i) => `
+      <label class="save-team-row">
+        <input type="checkbox" class="save-team-cb" data-idx="${i}" checked>
+        <span class="save-team-name">${esc(t.name)}</span>
+        <span class="save-team-hint">added #${i+1}</span>
+      </label>`).join('');
+  }
+  modal.style.display = 'flex';
+}
+
+function closeSaveModal(){
+  document.getElementById('save-modal').style.display = 'none';
+}
+
+function confirmSaveJSON(){
+  const cbs = document.querySelectorAll('.save-team-cb');
+  const selected = [];
+  cbs.forEach(cb => { if(cb.checked) selected.push(parseInt(cb.dataset.idx)); });
+  if(!selected.length){ alert('Select at least one team'); return; }
+
+  const snapshot = selected.map(i => {
+    const s = JSON.parse(JSON.stringify(teams[i]));
     s.spear.assemble.running = false;
     s.spear.assemble.matchRunning = false;
     s.spear.circles.forEach(c => { c.running = false; });
     if(s.spear.pending) s.spear.pending.running = false;
     ['R1','R2'].forEach(r => { s.forest[r].running = false; });
-    s.place.pendingR1.running = false;
-    s.place.pendingR2.running = false;
-    s.place.pending.running = false;
+    if(s.place.pendingR1) s.place.pendingR1.running = false;
+    if(s.place.pendingR2) s.place.pendingR2.running = false;
+    if(s.place.pending)   s.place.pending.running = false;
     if(s.place.repickTimer) s.place.repickTimer.running = false;
     return s;
   });
-  const data = JSON.stringify({ version: 1, saved: new Date().toISOString(), teams: snapshot }, null, 2);
+
+  const data = JSON.stringify({ version:1, saved: new Date().toISOString(), teams: snapshot }, null, 2);
   const blob = new Blob([data], { type:'application/json' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  const ts = new Date().toISOString().slice(0,16).replace('T','_').replace(':','-');
+  const ts = new Date().toISOString().slice(0,16).replace('T','_').replace(/:/g,'-');
   a.download = `robocon_session_${ts}.json`;
   a.click();
   URL.revokeObjectURL(a.href);
+  closeSaveModal();
 }
 
 function importJSON(evt){
@@ -2274,6 +2424,19 @@ render();
     </div>
 
     <button onclick="closeFinish()" style="width:100%;padding:12px;background:var(--acc);color:#06251e;border:none;border-radius:8px;font-size:14px;font-weight:bold;letter-spacing:2px;cursor:pointer">CLOSE</button>
+  </div>
+</div>
+
+<!-- save modal -->
+<div id="save-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:9999;align-items:center;justify-content:center">
+  <div class="save-modal-box">
+    <div class="save-modal-title">💾 SAVE SESSION</div>
+    <div class="save-modal-sub">Select teams to save — all pre-selected</div>
+    <div class="save-team-list"></div>
+    <div class="save-modal-actions">
+      <button class="save-modal-cancel" onclick="closeSaveModal()">✕ CANCEL</button>
+      <button class="save-modal-btn" onclick="confirmSaveJSON()">💾 SAVE SELECTED</button>
+    </div>
   </div>
 </div>
 
