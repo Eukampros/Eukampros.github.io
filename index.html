@@ -247,11 +247,11 @@
   /* forest & place phase */
   /* field map sidebar */
   .game-layout{display:flex;flex-direction:row;gap:0;align-items:stretch;width:100%}
-  .field-sidebar{width:420px;min-width:420px;flex-shrink:0;position:sticky;top:12px;
+  .field-sidebar{width:420px;min-width:420px;flex-shrink:0;
     background:#fff;border:2px solid var(--line);border-radius:10px;
     box-shadow:0 4px 20px rgba(0,0,0,.3);transition:width .15s;
-    display:flex;flex-direction:column;height:calc(100vh - 24px);overflow:hidden;
-    order:0}
+    display:flex;flex-direction:column;overflow:hidden;
+    order:0;align-self:stretch}
   .game-phases-wrap{flex:1;min-width:0;overflow:hidden;padding-left:12px;order:1}
   .field-sidebar.collapsed{width:32px}
   .field-sidebar-label{font-size:10px;font-weight:bold;letter-spacing:2px;
