@@ -775,6 +775,11 @@ function makeTeam(name){
   };
 }
 
+function countedLaps(laps){
+  // Only count laps where a spearhead was actually picked (hasSpear !== false)
+  return (laps||[]).filter(l => typeof l === 'object' ? l.hasSpear !== false : true);
+}
+
 function logEvent(idx, phase, action, detail){
   const t = teams[idx];
   const MATCH_MS = 3*60*1000;
@@ -843,13 +848,19 @@ function toggleTimer(idx, round, taskKey){
       clearInterval(intervals[key]);
       delete intervals[key];
       asm.running = false;
-      // save lap
+      // save lap only if a spearhead was picked during this run
       if(asm.ms > 0){
-        asm.laps.push(asm.ms);
-        asm.count = asm.laps.length;
-        logEvent(idx, 'spear', 'assemble', `Assembled #${asm.laps.length} — ${msToDisplay(asm.ms)}`);
+        const hasSpear = !!asm.pendingAssigned;
+        asm.laps.push({ ms: asm.ms, display: msToDisplay(asm.ms), hasSpear });
+        asm.count = asm.laps.filter(l=>l.hasSpear!==false).length;
+        logEvent(idx, 'spear', 'assemble', `Assembled #${asm.laps.length} — ${msToDisplay(asm.ms)}${hasSpear?'':' (no spear picked — not counted)'}`);
       }
+      asm.pendingAssigned = false;
       asm.ms = 0; asm.display = '00.000';
+      // also cancel spearhead pending timer if running
+      const pendKey = `ti-${idx}-pending`;
+      if(intervals[pendKey]){ clearInterval(intervals[pendKey]); delete intervals[pendKey]; }
+      teams[idx].spear.pending = { ms:0, running:false, display:'00.000' };
     } else {
       // start assemble lap timer
       const startWall = Date.now();
@@ -1002,6 +1013,10 @@ function startCircle(idx, ci){
     sp.pending = { ms:0, running:false, display:'00.000' };
     sp.pickSeq++;
     c.pickOrder = sp.pickSeq;
+    // mark this assemble lap as having a spear
+    if(teams[idx].spear.assemble.running){
+      teams[idx].spear.assemble.pendingAssigned = true;
+    }
     render();
     return;
   }
@@ -1030,6 +1045,10 @@ function stopCircle(idx, ci){
   const key = `ti-${idx}-circle-${ci}`;
   if(intervals[key]){ clearInterval(intervals[key]); delete intervals[key]; }
   c.running = false;
+  // mark this assemble lap as having a spear assigned
+  if(teams[idx].spear.assemble.running){
+    teams[idx].spear.assemble.pendingAssigned = true;
+  }
   render();
 }
 
@@ -1571,21 +1590,24 @@ function renderConclude(idx){
   // ── PART 1 ────────────────────────────────────────────────────────────────
   const picked = sp.circles.map((c,ci)=>({...c,ci})).filter(c=>c.pickOrder>0).sort((a,b)=>a.pickOrder-b.pickOrder);
   const laps = sp.assemble.laps;
+  const validLapsConclude = countedLaps(laps);
   const count = laps.length;
-  const totalPhaseMs = laps.reduce((a,b)=>a+b,0);
-  const avgMs = count ? Math.round(totalPhaseMs/count) : 0;
-  const totalScore = count*10;
+  const totalPhaseMs = validLapsConclude.reduce((a,l)=>a+(typeof l==='object'?l.ms:l),0);
+  const avgMs = validLapsConclude.length ? Math.round(totalPhaseMs/validLapsConclude.length) : 0;
+  const totalScore = validLapsConclude.length * 10;
 
   // Part 1 combined table: TIME ASSEMBLE | SPEARHEAD ORDER
   const part1Rows = count || picked.length ? (() => {
     const maxRows = Math.max(count, picked.length);
     return Array.from({length:maxRows},(_,i)=>{
       const lap = laps[i];
+      const lapMs = lap ? (typeof lap==='object'?lap.ms:lap) : null;
+      const counted = lap ? (typeof lap==='object'?lap.hasSpear!==false:true) : false;
       const pk  = picked[i];
       return `
       <tr class="con-tr">
         <td class="con-td con-order">#${i+1}</td>
-        <td class="con-td con-time" style="color:var(--yellow)">${lap ? msToDisplay(lap) : '—'}</td>
+        <td class="con-td con-time" style="color:${counted?'var(--yellow)':'var(--danger)'}">${lapMs ? msToDisplay(lapMs) : '—'}${!counted&&lap?` <span style="font-size:9px">(NO SPEAR)</span>`:''}</td>
         <td class="con-td con-img-cell">${pk ? `<img src="${CIRCLE_IMGS[pk.ci]}" class="con-spear-img">` : '—'}</td>
         <td class="con-td con-type">${pk ? CIRCLE_LABELS[pk.ci] : '—'}</td>
         <td class="con-td con-slot" style="color:var(--mut)">${pk ? `SLOT ${pk.ci+1}` : ''}</td>
@@ -1877,24 +1899,30 @@ function renderSpear(idx){
     <div class="circle-stop-time" id="circle-stoptime-${idx}">${s.circles[runningCircle].display}</div>
   </div>` : '';
   // assemble laps
-  const lapsHTML = asm.laps.length ? asm.laps.map((ms,li)=>`
+  const lapsHTML = asm.laps.length ? asm.laps.map((lap,li)=>{
+    const ms = typeof lap==='object' ? lap.ms : lap;
+    const counted = typeof lap==='object' ? lap.hasSpear!==false : true;
+    return `
     <div class="lap-row">
       <span class="lap-num">#${li+1}</span>
       <span class="lap-time">${msToDisplay(ms)}</span>
+      ${!counted ? `<span style="font-size:10px;color:var(--danger);letter-spacing:1px">NO SPEAR</span>` : ''}
       <button class="lap-del" onclick="deleteLap(${idx},${li})">✕ DELETE</button>
-    </div>`).join('') : `<div style="color:var(--mut);font-size:12px;font-style:italic">No laps yet — start timer to record</div>`;
-  const avgMs = asm.laps.length ? asm.laps.reduce((a,b)=>a+b,0)/asm.laps.length : 0;
-  const score = asm.laps.length * 10;
+    </div>`;
+  }).join('') : `<div style="color:var(--mut);font-size:12px;font-style:italic">No laps yet — start timer to record</div>`;
+  const validLaps = countedLaps(asm.laps);
+  const avgMs = validLaps.length ? validLaps.reduce((a,l)=>a+(typeof l==='object'?l.ms:l),0)/validLaps.length : 0;
+  const score = validLaps.length * 10;
   const conclusionHTML = `
   <div class="conclusion-box">
     <div class="conclusion-block">
       <div class="conclusion-label">TIMES ASSEMBLED</div>
-      <div class="conclusion-val">${asm.laps.length}</div>
+      <div class="conclusion-val">${validLaps.length}</div>
       <div class="conclusion-sub">× 10 pts each</div>
     </div>
     <div class="conclusion-block">
       <div class="conclusion-label">AVG TIME</div>
-      <div class="conclusion-val" style="font-size:22px">${asm.laps.length ? msToDisplay(Math.round(avgMs)) : '—'}</div>
+      <div class="conclusion-val" style="font-size:22px">${validLaps.length ? msToDisplay(Math.round(avgMs)) : '—'}</div>
       <div class="conclusion-sub">per assembly</div>
     </div>
     <div class="conclusion-block">
@@ -1984,7 +2012,7 @@ function closeFinish(){
 function showFinish(idx){
   const t = teams[idx];
   const sp = t.spear;
-  const weaponScore  = sp.assemble.laps.length * 10;
+  const weaponScore  = countedLaps(sp.assemble.laps).length * 10;
   const kfsR1        = t.forest.R1.confirmed ? t.forest.R1.score : 0;
   const kfsR2        = t.forest.R2.confirmed ? t.forest.R2.score : 0;
   const kfsScore     = kfsR1 + kfsR2;
